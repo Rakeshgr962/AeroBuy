@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .confirmation-container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        .confirmation-icon {
+            font-size: 60px;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+        p {
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        .order-details {
+            text-align: left;
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .order-details p {
+            margin: 5px 0;
+        }
+        .btn {
+            background-color: #FF9900;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+        }
+        .btn:hover {
+            background-color: #e68a00;
+        }
+    </style>
+</head>
+<body>
+    <div class="confirmation-container">
+        <div class="confirmation-icon">✓</div>
+        <h1>Order Confirmed!</h1>
+        <p>Thank you for your purchase. Your order has been received and is being processed.</p>
+        
+        <div class="order-details">
+            <p><strong>Order Number:</strong> {{ order._id }}</p>
+            <p><strong>Date:</strong> {{ order.checkout_date.strftime('%B %d, %Y %I:%M %p') }}</p>
+            <p><strong>Total:</strong> ₹{{ "%.2f"|format(order.total) }}</p>
+            <p><strong>Delivery to:</strong> {{ order.first_name }} {{ order.last_name }}</p>
+            <p><strong>Address:</strong> {{ order.address }}</p>
+        </div>
+        
+        <p>We've sent a confirmation email to <strong>{{ order.email }}</strong> with your order details.</p>
+        <a href="/" class="btn">Continue Shopping</a>
+    </div>
+</body>
+</html>

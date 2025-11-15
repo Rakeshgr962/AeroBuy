@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Create Account - AeroBuy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f5f5f5;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+        .signin-container {
+            width: 350px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            text-align: center;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #FF9900;
+            margin-bottom: 20px;
+        }
+        h2 {
+            margin-top: 10px;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            font-family: 'Poppins', sans-serif;
+        }
+        form {
+            text-align: left;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #2c3e50;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        input:focus {
+            outline: none;
+            border-color: #FF9900;
+            box-shadow: 0 0 0 2px rgba(255, 153, 0, 0.2);
+        }
+        .error-message {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        button[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background-color: #FF9900;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+        button[type="submit"]:hover {
+            background-color: #e68a00;
+        }
+        .terms {
+            font-size: 12px;
+            color: #666;
+            margin-top: 20px;
+            line-height: 1.5;
+        }
+        .terms a {
+            color: #FF9900;
+            text-decoration: none;
+        }
+        .terms a:hover {
+            text-decoration: underline;
+        }
+        .divider {
+            margin: 20px 0;
+            border-top: 1px solid #eee;
+            position: relative;
+        }
+        .divider-text {
+            background-color: white;
+            padding: 0 10px;
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #666;
+            font-size: 12px;
+        }
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+        }
+        .login-link a {
+            color: #FF9900;
+            text-decoration: none;
+        }
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="signin-container">
+        <div class="logo">AeroBuy</div>
+        <h2>Create Account</h2>
+
+        {% if error %}
+            <div class="error-message">{{ error }}</div>
+        {% endif %}
+
+        <form action="/signin" method="POST">
+            <label for="name"><b>Your name</b></label>
+            <input name="name" id="name" placeholder="First and last name" type="text" required />
+
+            <label><b>Mobile number or Email</b></label>
+            <input name="contact" type="text" required />
+
+            <label><b>Password</b></label>
+            <input name="password" type="password" placeholder="At least 6 characters" required />
+
+            <label><b>Re-enter Password</b></label>
+            <input name="re_password" type="password" required />
+
+            <button type="submit">Continue</button>
+        </form>
+
+        <div class="terms">
+            By creating an account, you agree to AeroBuy's
+            <a href="#" target="_blank">Conditions of Use</a> and
+            <a href="#" target="_blank">Privacy Notice</a>.
+        </div>
+
+        <div class="divider">
+            <span class="divider-text">or</span>
+        </div>
+
+        <div>
+            <p style="margin-bottom: 0;">Buying for work?</p>
+            <a href="#" target="_blank" style="color: #FF9900; text-decoration: none;">Create a free business account</a>
+        </div>
+
+        <div class="login-link">
+            Already have an account? <a href="#">Sign in</a>
+        </div>
+    </div>
+</body>
+</html>

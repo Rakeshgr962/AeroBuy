@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            padding: 0;
+            margin: 0;
+            background-color: #f8f9fa;
+        }
+        h1 {
+            text-align: center;
+            margin: 30px 0;
+            color: #2c3e50;
+            position: relative;
+        }
+        h1::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 3px;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #FF9900;
+        }
+        .cart-container {
+            max-width: 800px;
+            margin: 30px auto;
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            animation: fadeIn 0.5s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .cart-item {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            padding: 20px 0;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        .cart-item:hover {
+            background-color: #f9f9f9;
+        }
+        .cart-item img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-right: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .cart-item-details {
+            flex-grow: 1;
+        }
+        .cart-item-details h2 {
+            margin: 0;
+            font-size: 18px;
+            color: #2c3e50;
+        }
+        .cart-item-details p {
+            margin: 5px 0 0;
+            color: #555;
+            font-weight: bold;
+        }
+        .cart-item-details small {
+            color: #777;
+            font-size: 14px;
+        }
+        .remove-item {
+            position: absolute;
+            top: 20px;
+            right: 10px;
+            color: #999;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+        .remove-item:hover {
+            color: #d32f2f;
+            transform: scale(1.2);
+        }
+        .total {
+            text-align: right;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        .total-row {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        .total-row:last-child {
+            font-size: 24px;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+        .cart-button {
+            display: inline-block;
+            text-align: center;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-weight: bold;
+            width: 200px;
+            transition: all 0.3s ease;
+        }
+        .continue-shopping {
+            background-color: #f4f4f4;
+            color: #333;
+            border: 1px solid #ddd;
+        }
+        .continue-shopping:hover {
+            background-color: #e0e0e0;
+            transform: translateY(-2px);
+        }
+        .buy-now {
+            background-color: #FF9900;
+            color: white;
+            border: none;
+        }
+        .buy-now:hover {
+            background-color: #e68a00;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .empty-cart {
+            text-align: center;
+            padding: 40px 20px;
+            color: #666;
+        }
+        .empty-cart p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .animate__animated {
+            animation-duration: 0.5s;
+        }
+    </style>
+</head>
+<body>
+    <div class="cart-container">
+        <h1 class="animate__animated animate__fadeIn">Your Cart</h1>
+        {% if cart %}
+            {% for item in cart %}
+            <div class="cart-item animate__animated animate__fadeInUp" style="animation-delay: {{ loop.index * 0.1 }}s">
+                <img src="{{ item.image }}" alt="{{ item.name }}">
+                <div class="cart-item-details">
+                    <h2>{{ item.name }}</h2>
+                    <p>₹{{ "%.2f"|format(item.price) }}</p>
+                    <small>Added on: {{ item.added_at }}</small>
+                </div>
+                <form method="POST" action="{{ url_for('remove_from_cart', index=loop.index0) }}" style="display: inline;">
+                    <button type="submit" class="remove-item">✕</button>
+                </form>
+            </div>
+            {% endfor %}
+            <div class="total">
+                <div class="total-row">
+                    <span>Subtotal: ₹{{ "%.2f"|format(subtotal) }}</span>
+                </div>
+                <div class="total-row">
+                    <span>Shipping: ₹{{ "%.2f"|format(shipping) }}</span>
+                </div>
+                <div class="total-row">
+                    <span>Total: ₹{{ "%.2f"|format(total) }}</span>
+                </div>
+            </div>
+            
+            <div class="button-group">
+                <a href="{{ url_for('product') }}" class="cart-button continue-shopping animate__animated animate__fadeInLeft">Continue Shopping</a>
+                <a href="{{ url_for('checkout') }}" class="cart-button buy-now animate__animated animate__fadeInRight">Proceed to Checkout</a>
+            </div>
+        {% else %}
+            <div class="empty-cart animate__animated animate__fadeIn">
+                <p>Your cart is empty.</p>
+                <a href="{{ url_for('product') }}" class="cart-button continue-shopping">Browse Products</a>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

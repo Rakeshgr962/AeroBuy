@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome - AeroBuy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+            color: #2c3e50;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+        .welcome-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+        }
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #FF9900;
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: #FF9900;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        .button {
+            padding: 12px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        .home-button {
+            background-color: #FF9900;
+            color: white;
+            border: none;
+        }
+        .home-button:hover {
+            background-color: #e68a00;
+        }
+        .shop-button {
+            background-color: #232f3e;
+            color: white;
+            border: none;
+        }
+        .shop-button:hover {
+            background-color: #1a2733;
+        }
+        .checkmark {
+            font-size: 60px;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="welcome-container">
+        <div class="logo">AeroBuy</div>
+        <div class="checkmark">✓</div>
+        <h1>Welcome, {{ name }}!</h1>
+        <p>Your registration with AeroBuy has been successfully completed!</p>
+        <p>You're now ready to explore our wide range of products and enjoy a seamless shopping experience.</p>
+        
+        <div class="button-group">
+            <a href="/" class="button home-button">Go back to Home</a>
+            <a href="{{ url_for('home') }}" class="button shop-button">Continue Shopping</a>
+        </div>
+    </div>
+</body>
+</html>
