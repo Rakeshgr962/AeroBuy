@@ -6,7 +6,7 @@ from bson.objectid import ObjectId
 app = Flask(__name__)
 app.secret_key = "your_secret_key_here"
 
-# Connect to MongoDB
+# Connect to MongoDB 
 client = MongoClient("mongodb://localhost:27017")
 db = client["mydatabase"]
 users_collection = db["users"]
@@ -186,4 +186,5 @@ def order_confirmation(order_id):
     return render_template("order_confirmation.html", order=order)
 
 if __name__ == "__main__":
+
     app.run(debug=True)
