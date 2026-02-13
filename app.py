@@ -13,7 +13,6 @@ users_collection = db["users"]
 checkout_collection = db["checkouts"]
 orders_collection = db["orders"]
 products_collection = db["products"]
-
 # Add products to database if not exists
 def initialize_products():
     products = [
@@ -188,3 +187,4 @@ def order_confirmation(order_id):
 if __name__ == "__main__":
 
     app.run(debug=True)
+
